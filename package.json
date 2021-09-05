@@ -6,10 +6,14 @@
   "scripts": {
     "start": "nodemon --inspect src/index.js",
     "dev": "nodemon src/index.js -e js, hbs, json",
-    "watch": "node-sass --watch src/resources/scss --output src/public/css"
+    "watch": "node-sass --watch src/resources/scss --output src/public/css",
+    "format": "prettier --single-quote --trailing-comma all --tab-width 4 --write"
   },
   "lint-staged": {
-    "src/**/*.{js,json,scss}": "prettier --single-quote --trailing-comma all --tab-width 4 --write"
+    "src/**/*.{js,json,scss}": [
+      "yarn run format",
+      "git add"
+    ]
   },
   "husky": {
     "hooks": {
