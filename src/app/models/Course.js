@@ -1,9 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const slug = require('mongoose-slug-generator');
-
-/**Cai plugin tu tao slug theo ten model ma khong bi trung */
-mongoose.plugin(slug);
+const mongooseDelete = require('mongoose-delete');
 
 const Course = new Schema(
     {
@@ -16,5 +14,10 @@ const Course = new Schema(
     },
     { timestamps: true },
 );
+/**Add plugin */
+/**Cai plugin tu tao slug theo ten model ma khong bi trung */
+mongoose.plugin(slug);
+/**config soft delete & overide all method */
+Course.plugin(mongooseDelete, { deletedAt: true, overrideMethods: true });
 
 module.exports = mongoose.model('Course', Course);
